@@ -32,13 +32,15 @@ class PaymentManager extends Http
      * @return Payment
      * @throws RazorPayException
      */
-    public function create(Payment $payment): Payment
+    public function create(Payment $payment)
     {
         $response = $this->post(self::PAYMENT, $payment->toArray())->getContents();
-        $paymentResponse = new Payment();
-        $this->jsonMapper->mapObjectFromString($response, $paymentResponse);
+        return json_decode($response);
+        
+//         $paymentResponse = new Payment();
+//         $this->jsonMapper->mapObjectFromString($response, $paymentResponse);
 
-        return $paymentResponse;
+//         return $paymentResponse;
     }
 
     /**
