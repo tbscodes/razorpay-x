@@ -32,13 +32,16 @@ class ContactManager extends Http
      * @return Contact
      * @throws RazorPayException
      */
-    public function create(Contact $contact): Contact
+    public function create(Contact $contact)
     {
         $response = $this->post(self::ENDPOINT, $contact->toArray())->getContents();
-        $contactResponse = new Contact();
-        $this->jsonMapper->mapObjectFromString($response, $contactResponse);
+        
+        return json_decode($response);
+        
+//         $contactResponse = new Contact();
+//         $this->jsonMapper->mapObjectFromString($response, $contactResponse);
 
-        return $contactResponse;
+//         return $contactResponse;
     }
 
     /**
