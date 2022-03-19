@@ -35,13 +35,16 @@ class AccountManager extends Http
      * @return Account
      * @throws RazorPayException
      */
-    public function create(Account $account): Account
+    public function create(Account $account)
     {
         $response = $this->post(self::ACCOUNT_ENDPOINT, $account->toArray())->getContents();
-        $account = new Account();
-        $this->jsonMapper->mapObjectFromString($response, $account);
+        
+        return json_decode($response);
+        
+//         $account = new Account();
+//         $this->jsonMapper->mapObjectFromString($response, $account);
 
-        return $account;
+//         return $account;
     }
 
     /**
