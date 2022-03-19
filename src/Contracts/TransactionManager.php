@@ -30,13 +30,14 @@ class TransactionManager extends Http
      * @return TransactionCollection
      * @throws RazorPayException
      */
-    public function fetch(Transaction $transaction): TransactionCollection
+    public function fetch(Transaction $transaction)
     {
         $response = $this->get(self::ENDPOINT, $transaction->toArray())->getContents();
-        $transactionCollection = new TransactionCollection();
-        $this->jsonMapper->mapToCollectionFromString($response, $transactionCollection);
+        return json_decode($response);
+//         $transactionCollection = new TransactionCollection();
+//         $this->jsonMapper->mapToCollectionFromString($response, $transactionCollection);
 
-        return $transactionCollection;
+//         return $transactionCollection;
     }
 
     /**
